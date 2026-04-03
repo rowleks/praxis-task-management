@@ -12,7 +12,7 @@ router.use(authenticate)
 
 router.get('/', requireAdmin, getAllUsers)
 router.get('/:id', getUserById)
-router.put('/:id', validateUpdateUser, updateUser)
+router.patch('/:id', validateUpdateUser, updateUser)
 router.delete('/:id', deleteUser)
 
 module.exports = router

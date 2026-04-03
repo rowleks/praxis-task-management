@@ -12,7 +12,10 @@ const findOne = async filter => await User.findOne(filter)
 const create = async userData => await new User(userData).save()
 
 const updateById = async (id, userData) =>
-  await User.findByIdAndUpdate(id, userData, { returnDocument: 'after' })
+  await User.findByIdAndUpdate(id, userData, {
+    returnDocument: 'after',
+    runValidators: true,
+  })
 
 const deleteById = async id => {
   const user = await User.findById(id)

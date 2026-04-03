@@ -17,7 +17,7 @@ router.use(authenticate)
 router.get('/', getAllTasks)
 router.get('/:id', getTaskById)
 router.post('/', validateCreateTask, createTask)
-router.put('/:id', validateUpdateTask, updateTask)
+router.patch('/:id', validateUpdateTask, updateTask)
 router.delete('/:id', deleteTask)
 
 module.exports = router
