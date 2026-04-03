@@ -9,6 +9,11 @@ const validate = (req, res, next) => {
 }
 
 const validateRegister = [
+  body('name')
+    .notEmpty()
+    .withMessage('Name is required')
+    .isLength({ max: 50 })
+    .withMessage('Name cannot exceed 50 characters'),
   body('email')
     .notEmpty()
     .withMessage('Email is required')
@@ -33,6 +38,10 @@ const validateLogin = [
 ]
 
 const validateUpdateUser = [
+  body('name')
+    .optional()
+    .isLength({ max: 50 })
+    .withMessage('Name cannot exceed 50 characters'),
   body('email').optional().isEmail().withMessage('Must be a valid email'),
   body('password')
     .optional()

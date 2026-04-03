@@ -7,8 +7,13 @@ const authService = require('../services/auth.service')
 /* eslint-disable no-console */
 
 const users = [
-  { email: 'admin@praxis.com', password: 'password123', role: 'admin' },
-  { email: 'user@praxis.com', password: 'password123' },
+  {
+    name: 'Admin User',
+    email: 'admin@praxis.com',
+    password: 'password123',
+    role: 'admin',
+  },
+  { name: 'John Doe', email: 'user@praxis.com', password: 'password123' },
 ]
 
 const seedTasks = userId => [
