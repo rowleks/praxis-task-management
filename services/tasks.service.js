@@ -1,8 +1,9 @@
 const Task = require('../model/tasks.model')
 
-const getAllTasks = async () => await Task.findAll()
+const getAllTasks = async (filters = {}) => await Task.findAll(filters)
 
-const getTaskById = async id => await Task.findById(id)
+const getTaskById = async (id, userId) =>
+  await Task.findOne({ _id: id, userId })
 
 const createTask = async taskData => await Task.create(taskData)
 
