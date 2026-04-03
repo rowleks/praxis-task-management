@@ -22,7 +22,7 @@ app.use(cors())
 app.use(morganMiddleware)
 app.use(express.json())
 
-app.use('/', require('./routes'))
+app.use('/api', require('./routes'))
 
 app.use(unknownEndpoint)
 app.use(errorHandler)
