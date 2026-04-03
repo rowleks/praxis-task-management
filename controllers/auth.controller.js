@@ -1,5 +1,6 @@
 const usersService = require('../services/users.service')
 const authService = require('../services/auth.service')
+const { success, error } = require('../utils/response')
 
 const register = async (req, res) => {
   const { email, password } = req.body
@@ -8,22 +9,22 @@ const register = async (req, res) => {
     email,
     password: hashedPassword,
   })
-  res.status(201).json(user)
+  success(res, user, 201)
 }
 
 const login = async (req, res) => {
   const { email, password } = req.body
   const user = await usersService.getUserByEmail(email)
   if (!user || !(await authService.comparePassword(password, user.password))) {
-    return res.status(401).json({ message: 'Invalid credentials' })
+    return error(res, 'Invalid credentials', 401)
   }
-  const token = authService.generateToken({ id: user.id })
-  res.json({ token })
+  const token = authService.generateToken({ id: user.id, email: user.email })
+  success(res, { token, user })
 }
 
 const logout = async (req, res) => {
   await authService.blacklistToken(req.token)
-  res.status(204).end()
+  success(res, null, 204)
 }
 
 module.exports = { register, login, logout }

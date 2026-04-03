@@ -13,8 +13,11 @@ const getTaskAndVerifyOwnership = async (id, userId) => {
 
 const getAllTasks = async (filters = {}) => await Task.findAll(filters)
 
-const getTaskById = async (id, userId) =>
-  await Task.findOne({ _id: id, userId })
+const getTaskById = async (id, userId) => {
+  const task = await Task.findOne({ _id: id, userId })
+  if (!task) throw Object.assign(new Error('Task not found'), { status: 404 })
+  return task
+}
 
 const createTask = async taskData => await Task.create(taskData)
 

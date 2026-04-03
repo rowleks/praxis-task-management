@@ -1,23 +1,24 @@
 const usersService = require('../services/users.service')
+const { success } = require('../utils/response')
 
-const getAllUsers = async (_, res) => {
+const getAllUsers = async (req, res) => {
   const users = await usersService.getAllUsers()
-  res.json(users)
+  success(res, users)
 }
 
 const getUserById = async (req, res) => {
   const user = await usersService.getUserById(req.params.id)
-  res.json(user)
+  success(res, user)
 }
 
 const updateUser = async (req, res) => {
   const user = await usersService.updateUser(req.params.id, req.body)
-  res.json(user)
+  success(res, user)
 }
 
 const deleteUser = async (req, res) => {
   await usersService.deleteUser(req.params.id)
-  res.status(204).end()
+  success(res, null, 204)
 }
 
 module.exports = { getAllUsers, getUserById, updateUser, deleteUser }
