@@ -1,12 +1,41 @@
 import { useState, useEffect, useMemo } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { useTaskResources } from '../hooks'
 import { TaskFilters } from '../components/TaskFilters'
 import { TaskCard } from '../components/TaskCard'
 import { TaskForm } from '../components/TaskForm'
 
-export function DashboardPage() {
-  const { tasks, isLoading, fetchTasks, createTask, updateTask, deleteTask } = useTaskResources()
-  const [filters, setFilters] = useState({ status: '', priority: '' })
+export const DashboardPage = () => {
+  const { tasks, isLoading, fetchTasks, createTask, updateTask, deleteTask } =
+    useTaskResources()
+  const [searchParams, setSearchParams] = useSearchParams()
+
+  const filters = useMemo(
+    () => ({
+      status: searchParams.get('status') || '',
+      priority: searchParams.get('priority') || '',
+    }),
+    [searchParams]
+  )
+
+  const setFilters = newFilters => {
+    const params = new URLSearchParams(searchParams)
+
+    if (newFilters.status) {
+      params.set('status', newFilters.status)
+    } else {
+      params.delete('status')
+    }
+
+    if (newFilters.priority) {
+      params.set('priority', newFilters.priority)
+    } else {
+      params.delete('priority')
+    }
+
+    setSearchParams(params)
+  }
+
   const [showTaskForm, setShowTaskForm] = useState(false)
 
   useEffect(() => {
@@ -15,11 +44,13 @@ export function DashboardPage() {
     if (filters.status) queryParams.append('status', filters.status)
     if (filters.priority) queryParams.append('priority', filters.priority)
 
-    const queryString = queryParams.toString() ? `?${queryParams.toString()}` : ''
+    const queryString = queryParams.toString()
+      ? `?${queryParams.toString()}`
+      : ''
     fetchTasks(queryString)
   }, [filters, fetchTasks])
 
-  const handleCreateTask = async (taskData) => {
+  const handleCreateTask = async taskData => {
     const success = await createTask(taskData)
     if (success) {
       setShowTaskForm(false)
