@@ -66,6 +66,14 @@ Pure React Functional Components formatted entirely as arrow functions:
 - **Vite**
 - **React-Router-Dom v6**
 
+### Environment Variables
+
+Create a `.env` file in the root of the project to configure the API endpoint:
+
+```env
+VITE_API_URL=http://localhost:4000/api
+```
+
 ### Getting Started
 
 Install modules and dependencies:
