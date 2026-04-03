@@ -20,12 +20,16 @@ const createTask = async (req, res) => {
 }
 
 const updateTask = async (req, res) => {
-  const task = await tasksService.updateTask(req.params.id, req.body)
+  const task = await tasksService.updateTask(
+    req.params.id,
+    req.user.id,
+    req.body
+  )
   res.json(task)
 }
 
 const deleteTask = async (req, res) => {
-  await tasksService.deleteTask(req.params.id)
+  await tasksService.deleteTask(req.params.id, req.user.id)
   res.status(204).end()
 }
 
