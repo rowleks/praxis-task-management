@@ -1,6 +1,6 @@
 const usersService = require('../services/users.service')
 
-const getAllUsers = async (req, res) => {
+const getAllUsers = async (_, res) => {
   const users = await usersService.getAllUsers()
   res.json(users)
 }
