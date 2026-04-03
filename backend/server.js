@@ -1,5 +1,5 @@
 const express = require('express')
-const path = require('path')
+const path = require('node:path')
 const db = require('./database')
 const cors = require('cors')
 const {
@@ -17,27 +17,33 @@ process.on('uncaughtException', err => {
 let server
 
 const app = express()
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 4000
 
 app.use(cors())
 app.use(morganMiddleware)
 app.use(express.json())
 
+// API routes
 app.use('/api', require('./routes'))
 
+// Serve frontend
 app.use(express.static(path.join(__dirname, 'dist')))
 
 app.get('/{*splat}', (_, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'))
 })
 
+// Error handlers
 app.use(unknownEndpoint)
 app.use(errorHandler)
 
 const startServer = async () => {
   await db.connect()
   server = app.listen(PORT, () => {
-    console.log(`Server is listening on port ${PORT}`)
+    console.log(`Server is running on port ${PORT}`)
+    console.log(
+      `If you ran the build:ui script, visit: http://localhost:${PORT}/ to view frontend`
+    )
   })
 }
 
