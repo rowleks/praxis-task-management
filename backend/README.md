@@ -41,7 +41,15 @@ A RESTful API for managing tasks, built with Node.js, Express, MongoDB, and JWT 
    JWT_EXPIRES_IN=1hr
    ```
 
-5. (Optional) Seed the database with sample data:
+5. Build the frontend UI (optional, to serve from backend):
+
+   ```bash
+   npm run build:ui
+   ```
+
+   This script cleans the backend `dist` folder, builds the frontend project, and copies the resulting `dist` files into the backend directory.
+
+6. (Optional) Seed the database with sample data:
 
    ```bash
    npm run seed
@@ -51,11 +59,13 @@ A RESTful API for managing tasks, built with Node.js, Express, MongoDB, and JWT 
    - Admin — `admin@praxis.com` / `password123`
    - User — `user@praxis.com` / `password123`
 
-6. Start the server:
+7. Start the server:
 
    ```bash
    npm run dev
    ```
+
+   Once the server is running, you can access the application at [http://localhost:4000](http://localhost:4000). The backend will serve the frontend UI from the `dist` folder if you ran the script in step 5.
 
 ---
 

@@ -1,9 +1,10 @@
 const express = require('express')
+const path = require('path')
 const db = require('./database')
 const cors = require('cors')
 const {
-  unknownEndpoint,
   errorHandler,
+  unknownEndpoint,
 } = require('./middlewares/error.middleware')
 
 const { morganMiddleware } = require('./middlewares/morgan.middleware')
@@ -23,6 +24,12 @@ app.use(morganMiddleware)
 app.use(express.json())
 
 app.use('/api', require('./routes'))
+
+app.use(express.static(path.join(__dirname, 'dist')))
+
+app.get('/{*splat}', (_, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'))
+})
 
 app.use(unknownEndpoint)
 app.use(errorHandler)

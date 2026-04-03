@@ -12,7 +12,8 @@
     "dev": "node --watch index.js",
     "format": "prettier --write .",
     "lint": "eslint .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:ui": "shx rm -rf dist && cd ../frontend && npm run build && shx cp -r dist ../backend"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",
@@ -30,6 +31,7 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.5",
     "globals": "^17.4.0",
-    "prettier": "^3.8.1"
+    "prettier": "^3.8.1",
+    "shx": "^0.4.0"
   }
 }
