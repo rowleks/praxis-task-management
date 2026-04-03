@@ -1,0 +1,25 @@
+@baseUrl = http://localhost:4000/api
+@token = <paste_token_here>
+@userId = <paste_user_id_here>
+
+### Get all users (admin only)
+GET {{baseUrl}}/users
+Authorization: Bearer {{token}}
+
+### Get user by ID
+GET {{baseUrl}}/users/{{userId}}
+Authorization: Bearer {{token}}
+
+### Update user
+PUT {{baseUrl}}/users/{{userId}}
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Updated Name",
+  "email": "updated@example.com"
+}
+
+### Delete user
+DELETE {{baseUrl}}/users/{{userId}}
+Authorization: Bearer {{token}}
