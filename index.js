@@ -1,4 +1,14 @@
-const { startServer } = require('./app')
+require('dotenv').config()
+const { startServer } = require('./server')
 
-// Initialize and start the server
-startServer()
+/* eslint-disable no-console */
+const main = async () => {
+  try {
+    await startServer()
+  } catch (err) {
+    console.error(err)
+    process.exit(1)
+  }
+}
+
+main()
