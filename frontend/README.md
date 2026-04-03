@@ -9,7 +9,6 @@ A minimal, performant, and responsive React frontend for the Praxis Task Managem
 - **Dynamic Task Filtering**: Filter tasks through query parameters dynamically updating browser routing (`?status=todo&priority=high`).
 - **Centralized Toast Notifications**: Seamless success and error feedback propagated via Context API.
 - **Pure CSS**: All styling is driven directly from an `index.css` file leveraging CSS primitives, responsive grid layouts, and consistent design variables rather than external styling frameworks.
-- **Agent Guidelines Verified**: Built adhering strictly to the `agent.md` guidelines—managing distinct responsibilities between the Presentation Layer, State Hooks, and pure JavaScript Services.
 
 ---
 

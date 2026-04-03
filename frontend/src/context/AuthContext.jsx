@@ -6,6 +6,8 @@ import {
   useCallback,
 } from 'react'
 
+import { logout as logoutService } from '../services/auth'
+
 const AuthContext = createContext()
 
 export const AuthProvider = ({ children }) => {
@@ -23,11 +25,17 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem('user', JSON.stringify(newUser))
   }, [])
 
-  const logout = useCallback(() => {
-    setToken(null)
-    setUser(null)
-    localStorage.removeItem('token')
-    localStorage.removeItem('user')
+  const logout = useCallback(async () => {
+    try {
+      await logoutService()
+    } catch (err) {
+      console.error('Logout error:', err)
+    } finally {
+      setToken(null)
+      setUser(null)
+      localStorage.removeItem('token')
+      localStorage.removeItem('user')
+    }
   }, [])
 
   return (
