@@ -1,20 +1,22 @@
 import { useState } from 'react'
 
-export function TaskForm({ onSubmit, onCancel, initialData = null }) {
+export const TaskForm = ({ onSubmit, onCancel, initialData = null }) => {
   const [formData, setFormData] = useState({
     title: initialData?.title || '',
     description: initialData?.description || '',
-    dueDate: initialData?.dueDate ? new Date(initialData.dueDate).toISOString().split('T')[0] : '',
+    dueDate: initialData?.dueDate
+      ? new Date(initialData.dueDate).toISOString().split('T')[0]
+      : '',
     priority: initialData?.priority || 'medium',
     status: initialData?.status || 'todo',
   })
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
+    setFormData(prev => ({ ...prev, [name]: value }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault()
     const dataToSubmit = { ...formData }
     if (!dataToSubmit.dueDate) {

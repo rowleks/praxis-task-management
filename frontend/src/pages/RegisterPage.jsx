@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom'
 import { useNotification } from '../context/NotificationContext'
 import * as authService from '../services/auth'
 
-export function RegisterPage() {
+export const RegisterPage = () => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -11,7 +11,7 @@ export function RegisterPage() {
   const { notify } = useNotification()
   const navigate = useNavigate()
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault()
     setIsSubmitting(true)
     try {
@@ -36,7 +36,7 @@ export function RegisterPage() {
               type="text"
               id="name"
               value={name}
-              onChange={(e) => setName(e.target.value)}
+              onChange={e => setName(e.target.value)}
               required
             />
           </div>
@@ -46,7 +46,7 @@ export function RegisterPage() {
               type="email"
               id="email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={e => setEmail(e.target.value)}
               required
             />
           </div>
@@ -56,11 +56,15 @@ export function RegisterPage() {
               type="password"
               id="password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={e => setPassword(e.target.value)}
               required
             />
           </div>
-          <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
+          <button
+            type="submit"
+            className="btn btn-primary"
+            disabled={isSubmitting}
+          >
             {isSubmitting ? 'Registering...' : 'Register'}
           </button>
         </form>

@@ -1,23 +1,20 @@
-import { createContext, useContext, useState, useCallback, useEffect } from 'react'
+/* eslint-disable react-refresh/only-export-components */
+import {
+  createContext,
+  useContext,
+  useState,
+  useCallback,
+} from 'react'
 
 const AuthContext = createContext()
 
-export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null)
-  const [token, setToken] = useState(null)
-  const [isLoading, setIsLoading] = useState(true)
-
-  useEffect(() => {
-    const storedToken = localStorage.getItem('token')
+export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(() => {
     const storedUser = localStorage.getItem('user')
-
-    if (storedToken && storedUser) {
-      setToken(storedToken)
-      setUser(JSON.parse(storedUser))
-    }
-
-    setIsLoading(false)
-  }, [])
+    return storedUser ? JSON.parse(storedUser) : null
+  })
+  const [token, setToken] = useState(() => localStorage.getItem('token'))
+  const isLoading = false
 
   const login = useCallback((newToken, newUser) => {
     setToken(newToken)
@@ -40,7 +37,7 @@ export function AuthProvider({ children }) {
   )
 }
 
-export function useAuth() {
+export const useAuth = () => {
   const context = useContext(AuthContext)
   if (!context) {
     throw new Error('useAuth must be used within an AuthProvider')

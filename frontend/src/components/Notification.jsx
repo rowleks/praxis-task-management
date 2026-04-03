@@ -1,6 +1,6 @@
 import { useNotification } from '../context/NotificationContext'
 
-export function Notification() {
+export const Notification = () => {
   const { notification, clearNotification } = useNotification()
 
   if (!notification) {

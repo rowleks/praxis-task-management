@@ -1,6 +1,6 @@
 const BASE_URL = 'http://localhost:4000/api'
 
-export async function client(endpoint, { body, ...customConfig } = {}) {
+export const client = async (endpoint, { body, ...customConfig } = {}) => {
   const token = localStorage.getItem('token')
   const headers = {
     'Content-Type': 'application/json',

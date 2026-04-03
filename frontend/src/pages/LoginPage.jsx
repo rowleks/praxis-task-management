@@ -4,7 +4,7 @@ import { useAuth } from '../context/AuthContext'
 import { useNotification } from '../context/NotificationContext'
 import * as authService from '../services/auth'
 
-export function LoginPage() {
+export const LoginPage = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -12,7 +12,7 @@ export function LoginPage() {
   const { notify } = useNotification()
   const navigate = useNavigate()
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault()
     setIsSubmitting(true)
     try {
@@ -38,7 +38,7 @@ export function LoginPage() {
               type="email"
               id="email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={e => setEmail(e.target.value)}
               required
             />
           </div>
@@ -48,16 +48,20 @@ export function LoginPage() {
               type="password"
               id="password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={e => setPassword(e.target.value)}
               required
             />
           </div>
-          <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
+          <button
+            type="submit"
+            className="btn btn-primary"
+            disabled={isSubmitting}
+          >
             {isSubmitting ? 'Logging in...' : 'Login'}
           </button>
         </form>
         <p className="auth-link">
-          Don't have an account? <Link to="/register">Register here</Link>
+          Don&apos;t have an account? <Link to="/register">Register here</Link>
         </p>
       </div>
     </div>

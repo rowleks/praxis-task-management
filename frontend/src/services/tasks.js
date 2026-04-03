@@ -4,11 +4,11 @@ export const getAll = async (query = '') => {
   return await client(`/tasks${query}`)
 }
 
-export const getOne = async (id) => {
+export const getOne = async id => {
   return await client(`/tasks/${id}`)
 }
 
-export const create = async (taskData) => {
+export const create = async taskData => {
   return await client('/tasks', { body: taskData })
 }
 
@@ -19,6 +19,6 @@ export const update = async (id, taskData) => {
   })
 }
 
-export const remove = async (id) => {
+export const remove = async id => {
   return await client(`/tasks/${id}`, { method: 'DELETE' })
 }

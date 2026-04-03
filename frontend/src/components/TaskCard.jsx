@@ -1,27 +1,35 @@
-export function TaskCard({ task, onDelete, onUpdate }) {
-  const handleStatusChange = (e) => {
+export const TaskCard = ({ task, onDelete, onUpdate }) => {
+  const handleStatusChange = e => {
     onUpdate(task.id, { status: e.target.value })
   }
 
-  const handlePriorityChange = (e) => {
+  const handlePriorityChange = e => {
     onUpdate(task.id, { priority: e.target.value })
   }
 
-  const formattedDate = task.dueDate ? new Date(task.dueDate).toLocaleDateString() : 'No due date'
+  const formattedDate = task.dueDate
+    ? new Date(task.dueDate).toLocaleDateString()
+    : 'No due date'
 
   return (
     <div className={`task-card status-${task.status}`}>
       <div className="task-card-header">
         <h4 className="task-title">{task.title}</h4>
         <div className="task-actions">
-          <button className="btn-icon btn-delete" onClick={() => onDelete(task.id)} title="Delete Task">
+          <button
+            className="btn-icon btn-delete"
+            onClick={() => onDelete(task.id)}
+            title="Delete Task"
+          >
             &times;
           </button>
         </div>
       </div>
 
       <div className="task-meta">
-        <span className={`badge priority-${task.priority}`}>{task.priority}</span>
+        <span className={`badge priority-${task.priority}`}>
+          {task.priority}
+        </span>
         <span className="task-date">{formattedDate}</span>
       </div>
 

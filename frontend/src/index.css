@@ -30,15 +30,22 @@
   --space-2: 16px;
   --space-3: 24px;
   --space-4: 32px;
-  
+
   /* Radii & Shadows */
   --radius-sm: 4px;
   --radius-md: 8px;
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
-  --shadow-md: 0 4px 6px rgba(0,0,0,0.05);
-  
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.05);
+
   /* Font */
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    sans-serif;
 }
 
 * {
@@ -55,7 +62,12 @@ body {
 }
 
 /* Typography */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   color: var(--text-primary);
   margin-bottom: var(--space-2);
 }
@@ -116,7 +128,9 @@ a:hover {
   font-size: 0.9rem;
   font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.2s ease, opacity 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    opacity 0.2s ease;
 }
 .btn:disabled {
   opacity: 0.6;
@@ -343,13 +357,29 @@ a:hover {
   font-weight: 600;
   text-transform: uppercase;
 }
-.badge.priority-low { background-color: var(--badge-low-bg); color: var(--badge-low-text); }
-.badge.priority-medium { background-color: var(--badge-mid-bg); color: var(--badge-mid-text); }
-.badge.priority-high { background-color: var(--badge-high-bg); color: var(--badge-high-text); }
+.badge.priority-low {
+  background-color: var(--badge-low-bg);
+  color: var(--badge-low-text);
+}
+.badge.priority-medium {
+  background-color: var(--badge-mid-bg);
+  color: var(--badge-mid-text);
+}
+.badge.priority-high {
+  background-color: var(--badge-high-bg);
+  color: var(--badge-high-text);
+}
 
-.status-todo { border-left: 4px solid var(--text-secondary); }
-.status-in-progress { border-left: 4px solid var(--accent-color); }
-.status-done { border-left: 4px solid var(--badge-done-text); opacity: 0.8; }
+.status-todo {
+  border-left: 4px solid var(--text-secondary);
+}
+.status-in-progress {
+  border-left: 4px solid var(--accent-color);
+}
+.status-done {
+  border-left: 4px solid var(--badge-done-text);
+  opacity: 0.8;
+}
 
 /* Notification */
 .notification {
@@ -391,8 +421,12 @@ a:hover {
 }
 
 @keyframes slideIn {
-  from { transform: translateY(100%) opacity(0); }
-  to { transform: translateY(0) opacity(1); }
+  from {
+    transform: translateY(100%) opacity(0);
+  }
+  to {
+    transform: translateY(0) opacity(1);
+  }
 }
 
 /* Utility State */

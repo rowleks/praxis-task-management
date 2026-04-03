@@ -1,5 +1,5 @@
-export function TaskFilters({ filters, onChange }) {
-  const handleChange = (e) => {
+export const TaskFilters = ({ filters, onChange }) => {
+  const handleChange = e => {
     const { name, value } = e.target
     onChange({ ...filters, [name]: value })
   }
