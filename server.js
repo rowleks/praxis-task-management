@@ -4,9 +4,9 @@ const cors = require('cors')
 const {
   unknownEndpoint,
   errorHandler,
-} = require('./middlewares/errorMiddleware')
+} = require('./middlewares/error.middleware')
 
-const { morganMiddleware } = require('./middlewares/morganMiddleware')
+const { morganMiddleware } = require('./middlewares/morgan.middleware')
 
 /* eslint-disable no-console */
 process.on('uncaughtException', err => {
