@@ -48,5 +48,6 @@ taskSchema.plugin(toJSONPlugin)
 // Compound indexes for filtered queries
 taskSchema.index({ userId: 1, status: 1 })
 taskSchema.index({ userId: 1, priority: 1 })
+taskSchema.index({ userId: 1, createdAt: -1 })
 
 module.exports = taskSchema
