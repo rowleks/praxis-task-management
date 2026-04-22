@@ -3,9 +3,10 @@ const authService = require('../services/auth.service')
 const { success, error } = require('../utils/response')
 
 const register = async (req, res) => {
-  const { email, password } = req.body
+  const { name, email, password } = req.body
   const hashedPassword = await authService.hashPassword(password)
   const user = await usersService.createUser({
+    name,
     email,
     password: hashedPassword,
   })

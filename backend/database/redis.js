@@ -10,7 +10,9 @@ const connect = () => {
   })
 
   client.on('connect', () => console.log('Redis connected'))
-  client.on('error', err => console.error('Redis error:', err.message))
+  client.on('error', err => {
+    throw new Error(err.message)
+  })
 
   return client
 }
