@@ -1,6 +1,7 @@
 const express = require('express')
 const path = require('node:path')
 const db = require('./database')
+const redis = require('./database/redis')
 const cors = require('cors')
 const {
   errorHandler,
@@ -39,6 +40,7 @@ app.use(errorHandler)
 
 const startServer = async () => {
   await db.connect()
+  redis.connect()
   server = app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`)
     console.log(

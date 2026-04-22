@@ -9,14 +9,19 @@ const authenticate = async (req, res, next) => {
 
   const token = authorization.split(' ')[1]
 
-  if (await authService.isTokenBlacklisted(token)) {
-    return res.status(401).json({ message: 'Token has been invalidated' })
+  try {
+    const decoded = authService.verifyToken(token)
+    if (await authService.isTokenBlacklisted(token)) {
+      return res.status(401).json({ message: 'Token has been invalidated' })
+    }
+    req.user = await usersService.getUserById(decoded.id)
+    req.token = token
+    next()
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Authentication error:', error.message)
+    return res.status(401).json({ message: 'Invalid or expired token' })
   }
-
-  const decoded = authService.verifyToken(token)
-  req.user = await usersService.getUserById(decoded.id)
-  req.token = token
-  next()
 }
 
 const requireAdmin = (req, res, next) => {
