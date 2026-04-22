@@ -3,12 +3,15 @@ node_modules/
 
 # Build output
 dist/
-dist-ssr/
+build/
 
 # Environment files
 .env
 .env.*
-*.local
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
 # Logs
 logs/
@@ -16,24 +19,23 @@ logs/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-pnpm-debug.log*
 
 # Editor & OS
 .vscode/
 .idea/
 .DS_Store
 Thumbs.db
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+*.swp
+*.swo
 
 # Docker
 Dockerfile
 dev.Dockerfile
 .dockerignore
 
-# Docs / agent files
-agent.md
-spec.md
+# Docs
+README.md
+requirements.md
+
+# HTTP request files (dev tooling only)
+requests/
