@@ -1,0 +1,70 @@
+services:
+  nginx:
+    image: nginx:1.29
+    volumes:
+      - ./nginx/nginx.dev.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - 8080:80
+    container_name: reverse-proxy
+    depends_on:
+      - frontend
+      - backend
+
+  frontend:
+    container_name: praxis_frontend
+    image: praxis_frontend
+    build:
+      context: ./frontend
+      dockerfile: dev.Dockerfile
+    environment:
+      - VITE_API_URL=/api
+    volumes:
+      - ./frontend:/usr/src/app # Bind mount for source code
+      - frontend_node_modules:/usr/src/app/node_modules # Prevent host node_modules from overwriting container's
+
+  backend:
+    container_name: praxis_backend
+    image: praxis_backend
+    build:
+      context: ./backend
+      dockerfile: dev.Dockerfile
+    volumes:
+      - ./backend:/usr/src/app
+      - backend_node_modules:/usr/src/app/node_modules
+    environment:
+      - DB_URI=mongodb://the_username:the_password@mongo:27017/the_database?authSource=the_database
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      mongo:
+        condition: service_healthy
+      redis:
+        condition: service_started
+
+  mongo:
+    image: mongo:latest
+    container_name: praxis_mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=example
+      - MONGO_INITDB_DATABASE=the_database
+    volumes:
+      - ./backend/database/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - praxis_mongo_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - praxis_redis_data:/data
+    container_name: praxis_redis
+
+volumes:
+  frontend_node_modules:
+  backend_node_modules:
+  praxis_mongo_data:
+  praxis_redis_data:
