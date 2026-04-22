@@ -6,5 +6,8 @@ export default defineConfig({
   plugins: [react()],
   server: {
     allowedHosts: ['frontend', 'localhost'],
+    hmr: {
+      clientPort: 80, // browser connects HMR WebSocket through nginx on port 80
+    },
   },
 })
