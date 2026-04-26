@@ -19,7 +19,11 @@ const login = async (req, res) => {
   if (!user || !(await authService.comparePassword(password, user.password))) {
     return error(res, 'Invalid credentials', 401)
   }
-  const token = authService.generateToken({ id: user.id, email: user.email })
+  const token = authService.generateToken({
+    id: user.id,
+    email: user.email,
+    role: user.role,
+  })
   success(res, { token, user })
 }
 

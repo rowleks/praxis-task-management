@@ -1,5 +1,4 @@
 const authService = require('../services/auth.service')
-const usersService = require('../services/users.service')
 
 const authenticate = async (req, res, next) => {
   const { authorization } = req.headers
@@ -14,7 +13,7 @@ const authenticate = async (req, res, next) => {
     if (await authService.isTokenBlacklisted(token)) {
       return res.status(401).json({ message: 'Token has been invalidated' })
     }
-    req.user = await usersService.getUserById(decoded.id)
+    req.user = decoded // { id, email, role } from payload — no DB call
     req.token = token
     next()
   } catch (error) {
